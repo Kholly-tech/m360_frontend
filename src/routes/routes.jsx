@@ -30,6 +30,10 @@ import BacklinkAnalytic from "../components/dashboard/seo/BacklinkAnalytic";
 import ProtectedRoute from '../routes/ProtectedRoute';
 import PublicRoute from '../routes/PublicRoute';
 import { AuthProvider } from '../context/UseAuth';
+import SocialOauth from "../screens/auth/SocialOauth";
+import AdsOauth from "../screens/auth/AdsOauth";
+import MailOauth from "../screens/auth/MailOauth";
+import CommOauth from "../screens/auth/CommOauth";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +64,38 @@ const router = createBrowserRouter([
             element: (
               <PublicRoute restricted={true}>
                 <Register />
+              </PublicRoute>
+            ),
+          },
+          {
+            path: "/mail-auth/callback",
+            element: (
+              <PublicRoute>
+                <MailOauth />
+              </PublicRoute>
+            ),
+          },
+          {
+            path: "/ads-auth/callback",
+            element: (
+              <PublicRoute>
+                <AdsOauth />
+              </PublicRoute>
+            ),
+          },
+          {
+            path: "/comm-auth/callback",
+            element: (
+              <PublicRoute>
+                <CommOauth />
+              </PublicRoute>
+            ),
+          },
+          {
+            path: "/auth/callback",
+            element: (
+              <PublicRoute>
+                <SocialOauth />
               </PublicRoute>
             ),
           },

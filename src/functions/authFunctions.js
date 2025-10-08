@@ -1,10 +1,11 @@
-import { prodApiUrl } from "../utils/api";
+import { devApiUrl, prodApiUrl } from "../utils/api";
 import { setCookie, getCookie, removeCookie } from "../utils/cookies";
 import axios from "axios";
 
 // axios instance with auth headers.
 const authAxios = axios.create({
-  baseURL: prodApiUrl,
+  baseURL: devApiUrl,
+  // baseURL: prodApiUrl,
   withCredentials: true,
 });
 
@@ -163,3 +164,59 @@ export const logout = () => {
   // Redirect to login
   window.location.href = "/login";
 };
+
+export const mailCallback = async(code, state) => {
+  try {
+    const response = await authAxios.get(`/campaigns/callback?code=${code}&state=${state}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const adsCallback = async (code, state, oauth_token, oauth_verifier) => {
+  try {
+    let params = new URLSearchParams({
+      code,
+      state,
+      oauth_token,
+      oauth_verifier
+    });
+    let url = `/ads/callback?${params.toString()}`;
+    console.log('Endpoint: ', url);
+    const response = await authAxios.get(
+      url
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const commCallback = async (code, state, oauth_token, oauth_verifier) => {
+  try {
+    let params = new URLSearchParams({
+      code,
+      state,
+      oauth_token,
+      oauth_verifier
+    });
+    let url = `/comm/callback?${params.toString()}`;
+    console.log('Endpoint: ', url);
+    const response = await authAxios.get(
+      url
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const socialCallback = async(code, state) => {
+  try {
+    const response = await authAxios.get(`/socials/callback?code=${code}&state=${state}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
