@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { mailCallback } from "../../functions/authFunctions";
+import { commCallback } from "../../functions/authFunctions";
 import { useEffect } from "react";
 
 const CommOauth = () => {

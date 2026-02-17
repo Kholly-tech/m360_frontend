@@ -4,8 +4,8 @@ import axios from "axios";
 
 // axios instance with auth headers.
 const authAxios = axios.create({
-  // baseURL: devApiUrl,
-  baseURL: prodApiUrl,
+  baseURL: devApiUrl,
+  // baseURL: prodApiUrl,
   withCredentials: true,
 });
 
